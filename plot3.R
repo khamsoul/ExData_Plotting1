@@ -1,0 +1,11 @@
+mydata = read.table("household_power_consumption.txt",na.strings="?",sep=";",header=TRUE)
+mydata$Date = as.Date(mydata$Date,"%d/%m/%Y")
+smalldata <- mydata[mydata$Date == "2007-02-02" | mydata$Date == "2007-02-01",]
+plot(smalldata$Sub_metering_1,type='l',axes=FALSE,ylab="Energy sub metering",xlab="")
+lines(smalldata$Sub_metering_2,col="red")
+lines(smalldata$Sub_metering_3,col="blue")
+legend(x="topright",c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=c(1,1),lwd=c(2.5,2.5,2.5),col=c("black","red","blue"))
+xmax=length(smalldata$Date)
+axis(1, at=0:2*xmax/2,lab=c("Thu","Fri","Sat"))
+axis(2, at=c(0,10,20,30),lab=c(0,10,20,30))
+box("plot")
